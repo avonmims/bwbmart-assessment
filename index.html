@@ -92,25 +92,15 @@
 
                 // track sign-up clicks
                 document.getElementById('signup-btn').addEventListener('click', function() {
-                    amplitude.getInstance().logEvent('CTA Clicked', {
-                        'button_type': 'Sign Up',
-                        'color': 'Green',
-                        'timestamp': new Date().toISOString(),
-                        'page_location': 'hero'
-                    });
-                    alert('Sign Up Event Sent');
-                });
+                    amplitude.track('CTA Clicked', {
+                        'button_type': 'Sign Up'
+                    });});
 
                 // track demo request clicks
                 document.getElementById('demo-btn').addEventListener('click', function() {
-                    amplitude.getInstance().logEvent('CTA Clicked', {
-                        'button_type': 'Request Demo',
-                        'color': 'Blue',
-                        'timestamp': new Date().toISOString(),
-                        'page_location': 'hero'
-                    });
-                    alert('Request Demo Event Sent');
-                });
+                    amplitude.track('CTA Clicked', {
+                        'button_type': 'Request Demo'
+                    });});
             });
         </script>
     </body>
