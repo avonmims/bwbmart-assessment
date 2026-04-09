@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BWBMart Analytics Demo | Avon Mims</title>
+
+        <!-- Amplitude Analytics Tracking -->
+        <script src="https://cdn.amplitude.com/script/cba7eedc503cf0f30cc59e85218a2ac9.js"></script>
+        <script>
+            window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+            window.amplitude.init('cba7eedc503cf0f30cc59e85218a2ac9', {
+                "fetchRemoteConfig":true,
+                "autocapture":{
+                    "attribution":true,
+                    "fileDownloads":true,
+                    "formInteractions":true,
+                    "pageViews":true,
+                    "sessions":true,
+                    "elementInteractions":true,
+                    "networkTracking":true,
+                    "webVitals":true,
+                    "frustrationInteractions":{
+                        "thrashedCursor":true,
+                        "errorClicks":true,
+                        "deadClicks":true,
+                        "rageClicks":true
+                    }
+                }
+            });
+        </script>
+
+        <!-- Dark Mode & High Contrast CTA Stylization -->
+        <style>
+            body {
+                background-color: #1a1a1a;
+                color: #ffffff;
+                font-family: 'Inter', sans-serif;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .container {
+                text-align: center;
+            }
+
+            .cta-container {
+                margin-top: 30px;
+            }
+
+            .btn {
+                padding: 20px 40px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                margin: 10px;
+                transition: transform 0.2s, filter 0.2s;
+            }
+
+            .btn:hover {
+                transform: scale(1.05);
+                filter: brightness(1.1);
+            }
+
+            #signup-btn {
+                background-color: #00ff88;
+                color: #000;
+            }
+
+            #demo-btn {
+                background-color: #00d4ff;
+                color: #000;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="cta-container">
+            <button id="signup-btn" class="btn">Sign Up</button>
+            <button id="demo-btn" class="btn">Request Demo</button>
+        </div>
+
+        <script>
+            // ensure tracking scipts are loaded before user can interact with buttons, prevents data loss
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // track sign-up clicks
+                document.getElementById('signup-btn').addEventListener('click', function() {
+                    amplitude.getInstance().logEvent('CTA Clicked', {
+                        'button_type': 'Sign Up',
+                        'color': 'Green',
+                        'timestamp': new Date().toISOString(),
+                        'page_location': 'hero'
+                    });
+                    alert('Sign Up Event Sent');
+                });
+
+                // track demo request clicks
+                document.getElementById('demo-btn').addEventListener('click', function() {
+                    amplitude.getInstance().logEvent('CTA Clicked', {
+                        'button_type': 'Request Demo',
+                        'color': 'Blue',
+                        'timestamp': new Date().toISOString(),
+                        'page_location': 'hero'
+                    });
+                    alert('Request Demo Event Sent');
+                });
+            });
+        </script>
+    </body>
+</html>
